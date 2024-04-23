@@ -51,6 +51,7 @@ let revealAnimationElements = document.querySelectorAll("li, .name, .heading h1,
 revealAnimationElements.forEach((revealAnimationElement)=>{
     revealAnimationElement.style = `
     position: relative;
+    overflow: hidden;
     `
     revealAnimationElement.classList.add("hiddenRevealAnimation");
 });
@@ -93,7 +94,7 @@ function observeFunction(elements, className){
         });
     });
     elements.forEach((el) => observer.observe(el));
-}
+};
 
 observeFunction(revealAnimationElements, "showRevealAnimation");
 observeFunction(leftAnimationElements, "showLeftAnimation");
@@ -106,3 +107,21 @@ observeFunction(thumbnailAnimationElements, "showThumbnailAnimation");
 
 
 
+// hamburgerAnimation
+let hamburger = document.querySelectorAll(".hamburger, .navMenu, header");
+let body = document.querySelector("body");
+function hamburgerAnimation(){
+    hamburger[2].classList.toggle("hamburgerAnimation");
+    hamburger[1].classList.toggle("navMenuAnimation");
+    hamburger[0].classList.toggle("navMenuBackgrounAnimation");
+    body.classList.toggle("scrollOff");
+};
+
+allNavMenuitem.forEach((e)=>{
+    e.addEventListener("click", ()=>{
+        hamburger[2].classList.toggle("hamburgerAnimation");
+        hamburger[1].classList.toggle("navMenuAnimation");
+        hamburger[0].classList.toggle("navMenuBackgrounAnimation");
+        body.classList.toggle("scrollOff");
+    });
+});

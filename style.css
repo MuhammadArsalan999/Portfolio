@@ -67,6 +67,7 @@ section{
     height: 100vh;
     flex-wrap: wrap;
     padding-top: 6rem;
+    overflow: hidden;
 }
 h1{font-size: 3rem;}
 h1 span{
@@ -122,17 +123,19 @@ header nav{
     background: var(--bg-color);
 }
 
+header nav div:nth-child(1){
+    justify-content: space-between;
+}
+
 /* for script.js */
 .navShadow{box-shadow: 0 0 1rem #0000003d;}
 
 header nav .navLogo{
-    width: 30%;
     font-size: 2rem;
-
 }
 
 header nav .navMenu{
-    width: 65%;
+    width: 72%;
     padding: 0 1rem;
 }
 
@@ -178,7 +181,6 @@ header nav .navMenu ul li a:hover::before{
 }
 
 header nav .navBtn{
-    width: 5%;
     position: relative;
     /* background: yellow; */
 }
@@ -202,6 +204,10 @@ header nav .navBtn img:hover{scale: 1.1;}
 
 .hamburger{
     display: none;
+    background: url("./Assets/menu.svg") no-repeat center;
+    background-size: cover;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
 }
 
@@ -376,6 +382,7 @@ section .heading::before{
 }
 
 p span{
+    font-size: 1.8rem;
     background: var(--main-color);
     color: #fff;
     padding: 0 6px;
@@ -516,7 +523,7 @@ p span{
 }
 
 .project .thumbnail:hover{
-    scale: 1.1;
+    scale: 0.96;
 }
 
 .project h1{
@@ -717,47 +724,168 @@ footer p{
     *{font-size: 14px;}
 
     /* header */
-
-    .hamburger{display: block;}
-    .hamburger::before, .hamburger::after{
-        display: none;
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100vw;
-        height: 200vh;
-        background: green;
-        z-index: -1;
-    }
     .navMenu{
-        display: none;
-        position: fixed;
-        top: 20%;
+        position: absolute;
+        top: 270%;
         left: 50%;
-        transform: translateX(-300%);
+        transform: translateX(100%);
         z-index: 100;
+        transition: transform 0.3s;
     }
     .navMenu ul{
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 3rem;
     }
     .navMenu ul li{
         width: 100%;
         text-align: center;
-        margin: 1.5rem 0;
     }
-    .navMenu ul li a{font-size: 3rem;}
+    .navMenu li a{font-size: 2rem;}
+    .navMenu li::before, #header .navMenu a::before{display: none;}
+
+    /* .navBtn */
+    #header .navBtn{
+        position: fixed;;
+        bottom: 6%;
+        right: 6%;
+        width: 60px;
+        height: 60px;
+        padding: 10px;
+        background: var(--bg-color);
+        border-radius: 12px;
+        box-shadow: 0 0 12px 0px #00000036;
+        z-index: 200;
+    }
+    #header .navBtn button img{
+        left: 50%;
+        transform-origin: left top;
+        transform: translate(-50%, -50%);
+    }
+
+    .hamburger{
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 3%;
+        transform: translateY(-50%) rotate(0);
+        transition: transform 0.5s, background-image 0.1s 0.25s;
+    }
+    .hamburgerAnimation{
+        transform: translateY(-50%) rotate(360deg);
+        background-image: url(./Assets/close.svg);
+    }
+    .navMenuAnimation{
+        transform: translateX(-50%);
+    }
+    .navMenuBackgrounAnimation::before{
+        content: "";
+        position: fixed;
+        top: 72px;
+        transform: translateX(100%);
+        width: 100%;
+        height: 100%;
+        background: var(--bg-color);
+        z-index: 100;
+        transition: transform 0.3s;
+    }
+    .navMenuBackgrounAnimation::before{
+        transform: translateX(0%);
+    }
+    .scrollOff{overflow-y: hidden;}
+
+    /* heroSection */
+    #heroSection .left{width: 55%;}
+    #heroSection .left .btns button{
+        margin-bottom: 1.8rem;
+    }
+    #heroSection .right{width: 45%;}
+    #heroSection .right .circle{
+        width: 300px;
+        height: 300px;
+    }
+    #heroSection .right .circle::before{
+        width: 330px;
+        height: 330px;
+    }
+    #heroSection .right .circle::after{
+        width: 360px;
+        height: 360px;
+    }
+
+    /* skillsSeciton */
+    #skillsSection .skill h1:nth-child(1){
+        width: 220px;
+    }
+
+    /* portfolioSection */
+    .project{
+        width: 45%;
+    }
 }
 
 @media (max-width: 768px){
-    
+    body{
+        overflow-x: unset;
+    }
+    section{height: unset;}
+    /* heroSection */
+    #heroSection{flex-direction: column-reverse;}
+    #heroSection .left{width: 100%;}
+    #heroSection .right{
+        width: 100%;
+        margin: 4rem 0;
+    }
+    #heroSection .left{text-align: center;}
+    #heroSection .left .name h1, #heroSection .left .name h1 span{font-size: 4rem;}
+    #heroSection .left .about{
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    #heroSection .left .btns{margin-bottom: 2rem; justify-content: space-around;}
+    #heroSection .left .btns button{margin: 1rem;}
+    #heroSection .links{
+        position: absolute;
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    /* aboutSection */
+    #aboutSection .left, #aboutSection .right{
+        width: 100%;
+        text-align: center;
+        margin: 3rem 0;
+    }
+
+    /* skillsSection */
+    #skillsSection .skills{margin-top: 4rem;}
+    #skillsSection .skills .skill{
+        flex-wrap: wrap;
+        gap: 1.5rem 0;
+    }
+    #skillsSection .skills .skill h1:nth-child(1){width: 60%;}
+    #skillsSection .skills .skill h1:nth-child(2){width: 40%;}
+    #skillsSection .skills .skill .progressBar{width: 80%;}
+
+    /* portfolioSection */
+    .projects{justify-content: center;}
+    .project{
+        width: 90%;
+    }
+    .project .thumbnail:hover{
+        scale: 1;
+    }
+
+    /* contactSetcion */
+    #contact_form{
+        margin-top: 2rem;
+    }
+
+    /* footerSection */
+    #footer{margin-top: 2rem;}
 }
 
 @media (max-width: 480px){
-    
+    *{font-size: 12px;}
 }
 
-@media (max-width: 320px){
-    
-}
